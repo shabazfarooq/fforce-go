@@ -17,6 +17,8 @@ type Init struct {
 }
 
 func (this *Init) New(options Options) {
+  fmt.Println("** Init **\n")
+
   // Set local options
   this.options = options
 
@@ -30,12 +32,11 @@ func (this *Init) New(options Options) {
     this.instanceUrl,
   )
 
-  // Update instanceUrl with verified baseUrl from SFDC
-  this.instanceUrl = authenticatedCredentials.BaseUrl
-
   // Create local files if credentials authenticated
   if authenticatedCredentials.Authenticated {
     fmt.Println("\n** Authentication Successful **\n");
+    // Update instanceUrl with verified baseUrl from SFDC
+    this.instanceUrl = authenticatedCredentials.BaseUrl
     this.createLocalFilesAndDirectories();
   } else {
     fmt.Println("\n** Authentication Failed **\n");

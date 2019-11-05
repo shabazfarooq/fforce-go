@@ -29,7 +29,6 @@ func main() {
  */
 func greet() {
 	fmt.Println("** FForce **")
-	fmt.Println("")
 }
 
 func getBeginProperties() BeginProperties {

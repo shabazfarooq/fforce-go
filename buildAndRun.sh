@@ -38,4 +38,4 @@ echo -e "\033[0m"
 
 cd ./bin
 # ./fforce init
-./fforce reset-password 
+./fforce reset-password

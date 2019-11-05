@@ -16,22 +16,17 @@ type ResetPassword struct {
 }
 
 func (this *ResetPassword) New(options Options) {
+  fmt.Println("** Reset Password **\n")
+
   // Set local options
   this.options = options
-
-  fmt.Println("RESET PASSWORD")
-
   
   // Determine existing credentials
   this.determineExistingCredentials()
 
+  // Get new password
+  this.password = this.askPassword()
 
-
-  log.Fatal("BYE")
-
-
-
-  
   // Authenticate with SFDC
   authenticatedCredentials := sfdcapi.AuthenticateToSFDC(
     this.username,
@@ -39,15 +34,14 @@ func (this *ResetPassword) New(options Options) {
     this.instanceUrl,
   )
 
-  // Update instanceUrl with verified baseUrl from SFDC
-  this.instanceUrl = authenticatedCredentials.BaseUrl
-
   // Create local files if credentials authenticated
   if authenticatedCredentials.Authenticated {
     fmt.Println("\n** Authentication Successful **\n");
+    // Update instanceUrl with verified baseUrl from SFDC
+    this.instanceUrl = authenticatedCredentials.BaseUrl
     this.createLocalFilesAndDirectories();
   } else {
-    fmt.Println("\n** Authentication Failed **\n");
+    log.Fatal("\n** Authentication Failed **\n");
   }
 }
 
@@ -59,8 +53,6 @@ func (this *ResetPassword) determineExistingCredentials() {
   this.username = res.Username
   this.instanceUrl = res.ServerUrl
   this.instanceType = res.InstanceType
-
-
 
   // Validate user credentials
   if this.username == "" || this.instanceUrl == "" || this.instanceType == "" {
@@ -91,15 +83,11 @@ func (this *ResetPassword) createLocalFilesAndDirectories() {
     this.username,
     this.password,
     this.instanceUrl,
-    "blah",
+    this.instanceType,
   )
   projectio.CreateLoginFile(
     this.username,
     this.password,
     this.instanceType,
   )
-  projectio.CreateBuildXmlFile()
-  projectio.CreatePackageXml();
-  projectio.CreateExecuteAnonFile();
-  projectio.CreateQueryFile();
 }
