@@ -36,6 +36,9 @@ echo -e "\033[1;36m"
 echo "***************************** RUNNING APP ******************************"
 echo -e "\033[0m"
 
-cd ./bin
+# cd ./bin
+# ./fforce build /Users/shabazf/go-workspace/fforce/bin /Users/shabazf/go-workspace/fforce/bin/src2/pages/ApplicationShiftSelect.page page
 # ./fforce init
-./fforce reset-password
+# ./fforce reset-password
+
+cp ./bin/fforce /usr/local/bin/fforce
