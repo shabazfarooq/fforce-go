@@ -37,5 +37,5 @@ echo "***************************** RUNNING APP ******************************"
 echo -e "\033[0m"
 
 cd ./bin
-./fforce init
+./fforce init -h -hello
 # ./fforce

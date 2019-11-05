@@ -15,11 +15,14 @@ type Init struct {
   sessionId string
 }
 
-func (this *Init) New(option string) {
+func (this *Init) New(options []string) {
   fmt.Println("Executing Init")
+  // fmt.Println(options)
+  // hasOption()
+  log.Fatal("leaving..")
 
   // Capture user credentials
-  this.askUserForCredentials();
+  this.askUserForCredentials()
   
   // Authenticate with SFDC
   authenticatedCredentials := sfdcapi.AuthenticateToSFDC(
