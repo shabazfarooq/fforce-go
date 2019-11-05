@@ -7,21 +7,30 @@ import (
   "../sfdcapi"
 )
 
-type Init struct {
+type ResetPassword struct {
   username string
   password string
   instanceUrl string
   instanceType string
-  sessionId string
   options Options
 }
 
-func (this *Init) New(options Options) {
+func (this *ResetPassword) New(options Options) {
   // Set local options
   this.options = options
 
-  // Capture user credentials
-  this.askUserForCredentials()
+  fmt.Println("RESET PASSWORD")
+
+  
+  // Determine existing credentials
+  this.determineExistingCredentials()
+
+
+
+  log.Fatal("BYE")
+
+
+
   
   // Authenticate with SFDC
   authenticatedCredentials := sfdcapi.AuthenticateToSFDC(
@@ -45,26 +54,21 @@ func (this *Init) New(options Options) {
 /**
  * Capture user credentials
  */
-func (this *Init) askUserForCredentials() {
-  // Capture user credentials
-  this.username = projectio.AskUser("Enter username")
-  this.password = this.askPassword()
-  this.instanceType = projectio.AskUser("Enter instance type(test/login/full URL)")
- 
-  // Finalize instance URL
-  if this.instanceType == "test" || this.instanceType == "login" {
-    this.instanceUrl = "https://" + this.instanceType + ".salesforce.com";
-  } else {
-    this.instanceUrl = this.instanceType
-  }
+func (this *ResetPassword) determineExistingCredentials() {
+  res := projectio.ReadBuildProperties()
+  this.username = res.Username
+  this.instanceUrl = res.ServerUrl
+  this.instanceType = res.InstanceType
+
+
 
   // Validate user credentials
-  if this.username == "" || this.password == "" || this.instanceType == "" {
-    log.Fatal("Missing username/password/instance type")
+  if this.username == "" || this.instanceUrl == "" || this.instanceType == "" {
+    log.Fatal("Missing username/password/instance type in build.properties file")
   }
 }
 
-func (this *Init) askPassword() string {
+func (this *ResetPassword) askPassword() string {
   hidePassword := this.options.hasOption("h", "hidePassword")
 
   if hidePassword {
@@ -77,7 +81,7 @@ func (this *Init) askPassword() string {
 /**
  * Create local files and directories
  */
-func (this *Init) createLocalFilesAndDirectories() {
+func (this *ResetPassword) createLocalFilesAndDirectories() {
   projectio.CreateOpenUrlFile(
     this.username,
     this.password,
@@ -87,7 +91,7 @@ func (this *Init) createLocalFilesAndDirectories() {
     this.username,
     this.password,
     this.instanceUrl,
-    this.instanceType,
+    "blah",
   )
   projectio.CreateLoginFile(
     this.username,

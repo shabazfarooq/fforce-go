@@ -44,14 +44,14 @@ func AskUserPassword(question string) string {
 /**
  * Read method
  */
-func readFile(filename string) []byte {
+func readFile(filename string) string {
   content, err := ioutil.ReadFile(filename)
   
   if err != nil {
     log.Fatal(err)
   }
 
-  return content;
+  return string(content);
 }
 
 /**

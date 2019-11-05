@@ -7,15 +7,16 @@ import (
 
 func CreateBuildPropertiesFile(username string,
                                password string,
-                               serverurl string) {
-  textToWrite := buildProperties(username, password, serverurl)
-  writeToFile("build.properties", textToWrite);
+                               serverurl string,
+                               instancetype string) {
+  textToWrite := buildProperties(username, password, serverurl, instancetype)
+  writeToFile(BUILDPROPERTIES, textToWrite);
   fmt.Println("... Created build.properties file");
 }
 
 func CreateBuildXmlFile() {
   textToWrite := buildXml()
-  writeToFile("build.xml", textToWrite)
+  writeToFile(BUILDXML, textToWrite)
   fmt.Println("... Created build.xml file");
 }
 

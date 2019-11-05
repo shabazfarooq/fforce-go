@@ -62,6 +62,8 @@ func executeRequestedCommand(beginProperties BeginProperties) {
 
 	if beginProperties.commandRequested == "init" {
 		command = &commands.Init{}
+	} else if beginProperties.commandRequested == "reset-password" {
+		command = &commands.ResetPassword{}
 	} else {
 		log.Fatal("Unknown command: '" + beginProperties.commandRequested + "'. try: init, build, reset-password")
 	}

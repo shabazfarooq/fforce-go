@@ -1,17 +1,20 @@
 package projectio
 
-const SRCFOLDER = "src2"
+const SRCFOLDER = "src"
 const EXECUTEANONFOLDER = "executeAnonymous"
 const QUERYFOLDER = "query"
+const BUILDPROPERTIES = "build.properties"
+const BUILDXML = "build.xml"
 
 func buildProperties(username string,
                      password string,
-                     serverurl string) string {
-  return "org = src" +
-    "\nsf.username = " + username +
+                     serverurl string,
+                     instancetype string) string {
+  return "sf.username = " + username +
     "\nsf.password = " + password +
     "\nsf.serverurl = " + serverurl +
-    "\nsf.maxPoll = 20"
+    "\nsf.maxPoll = 20" +
+    "\nsf.instancetype = " + instancetype
 }
 
 func openUrl(username string,
@@ -39,6 +42,7 @@ func buildXml() string {
 
     <condition property="sf.username" value=""> <not> <isset property="sf.username"/> </not> </condition>
     <condition property="sf.password" value=""> <not> <isset property="sf.password"/> </not> </condition>
+    <condition property="sf.sessionId" value=""> <not> <isset property="sf.sessionId"/> </not> </condition>
 
     <taskdef resource="com/salesforce/antlib.xml" uri="antlib:com.salesforce">
         <classpath>
@@ -47,14 +51,16 @@ func buildXml() string {
     </taskdef>
 
     <target name="pull">
-      <sf:retrieve
-        username="sf.username"
-        password="sf.password"
-        serverurl="sf.serverurl"
-        maxPoll="sf.maxPoll"
+      <sf:retrieve 
+        username="${sf.username}"
+        password="${sf.password}"
+        sessionId="${sf.sessionId}"
+        serverurl="${sf.serverurl}"
+        maxPoll="${sf.maxPoll}"
         retrieveTarget="` + SRCFOLDER + `"
         unpackaged="` + SRCFOLDER + `/package.xml"/>
     </target>
+
 </project>`
 }
 
@@ -83,4 +89,15 @@ func packageXml() string {
     </types>
     <version>40.0</version>
 </Package>`
+}
+
+func buildPropertiesReadKeyError(findingKey string) string {
+  exampleBuildProperties := buildProperties("username", "password", "serverurl", "instancetype")
+
+  return `Unable to locate "` + findingKey + `" within the build properties file.
+
+Expecting file named: ` + BUILDPROPERTIES + `
+
+Having the format:
+` + exampleBuildProperties
 }

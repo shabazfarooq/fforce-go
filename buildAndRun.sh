@@ -19,13 +19,13 @@ echo -e "\033[1;33m"
 echo "***************************** CLEAN FILES ******************************"
 echo -e "\033[0m"
 
-rm -rf bin/src2
-rm -rf bin/executeAnonymous
-rm -rf bin/query
-rm bin/build.properties
-rm bin/build.xml
-rm bin/openUrl
-rm bin/login
+# rm -rf bin/src2
+# rm -rf bin/executeAnonymous
+# rm -rf bin/query
+# rm bin/build.properties
+# rm bin/build.xml
+# rm bin/openUrl
+# rm bin/login
 
 
 #
@@ -37,5 +37,5 @@ echo "***************************** RUNNING APP ******************************"
 echo -e "\033[0m"
 
 cd ./bin
-./fforce init 
-# ./fforce
+# ./fforce init
+./fforce reset-password 
