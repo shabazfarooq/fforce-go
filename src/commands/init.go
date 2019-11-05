@@ -13,13 +13,12 @@ type Init struct {
   instanceUrl string
   instanceType string
   sessionId string
+  options Options
 }
 
-func (this *Init) New(options []string) {
+func (this *Init) New(options Options) {
+  this.options = options
   fmt.Println("Executing Init")
-  // fmt.Println(options)
-  // hasOption()
-  log.Fatal("leaving..")
 
   // Capture user credentials
   this.askUserForCredentials()
@@ -66,8 +65,7 @@ func (this *Init) askUserForCredentials() {
 }
 
 func (this *Init) askPassword() string {
-  // const hidePassword = super.hasOption('showpassword') === false;
-  hidePassword := false;
+  hidePassword := this.options.hasOption("h", "hidePassword")
 
   if hidePassword {
     return projectio.AskUserPassword("Enter password")

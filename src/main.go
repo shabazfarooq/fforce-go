@@ -78,9 +78,12 @@ func getBeginProperties() BeginProperties {
 }
 
 func executeRequestedCommand(beginProperties BeginProperties) {
-	var command commands.Command
+	// Build options type
+	options := commands.Options{beginProperties.options}
 
 	// Determine command to execute
+	var command commands.Command
+
 	if beginProperties.commandRequested == "init" {
 		command = &commands.Init{}
 	} else {
@@ -88,5 +91,5 @@ func executeRequestedCommand(beginProperties BeginProperties) {
 	}
 
 	// Execute command with options
-	command.New(beginProperties.options)
+	command.New(options)
 }
