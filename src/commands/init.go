@@ -17,8 +17,8 @@ type Init struct {
 }
 
 func (this *Init) New(options Options) {
+  // Set local options
   this.options = options
-  fmt.Println("Executing Init")
 
   // Capture user credentials
   this.askUserForCredentials()
