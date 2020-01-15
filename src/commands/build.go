@@ -2,6 +2,7 @@ package commands
 
 import (
 	"fmt"
+	"log"
 	"../projectio"
 )
 
@@ -15,21 +16,29 @@ type Build struct {
 func (this *Build) New(options Options) {
   fmt.Println("** Build **\n")
 
-  // Set local options
-  this.options = options
-
-  // TODO: validate parameters
+	// Validate parameters
+	this.validateAndSetParams(options)
   
-  // Extract parameters
-  this.parentPath = this.options.Options[0]
-  this.buildFilePath = this.options.Options[1]
-  this.buildFileExt = this.options.Options[2]
-
   // Login
   projectio.ExecuteLoginScript(this.parentPath)
 
   // Build
   this.buildFile()
+}
+
+func (this *Build) validateAndSetParams(options Options) {
+  // Set local options
+  this.options = options
+
+  // If options empty or does not have type and name parameters, assume help
+  if len(this.options.Options) < 3 {
+	  log.Fatal("fforce build [ParentPath] [BuildFilePath] [BuildFileExtension (cls, trigger, page, component, apex, soql)]")
+	}
+
+	// Set local properties
+  this.parentPath = this.options.Options[0]
+  this.buildFilePath = this.options.Options[1]
+  this.buildFileExt = this.options.Options[2]
 }
 
 func (this *Build) buildFile() {
