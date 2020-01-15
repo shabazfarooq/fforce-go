@@ -39,7 +39,7 @@ func getBeginProperties() BeginProperties {
 	if argsLength >= 2 {
 		returnStruct.commandRequested = os.Args[1]
 	} else {
-		log.Fatal("Missing command, ie: init, build, reset-password")
+		log.Fatal("Missing command, ie: init, build, create, reset-password")
 	}
 
 	// Extract options (index >=2)
@@ -65,8 +65,10 @@ func executeRequestedCommand(beginProperties BeginProperties) {
 		command = &commands.ResetPassword{}
 	} else if beginProperties.commandRequested == "build" {
 		command = &commands.Build{}
+	} else if beginProperties.commandRequested == "create" {
+		command = &commands.Create{}
 	} else {
-		log.Fatal("Unknown command: '" + beginProperties.commandRequested + "'. try: init, build, reset-password")
+		log.Fatal("Unknown command: '" + beginProperties.commandRequested + "'. try: init, build, create, reset-password")
 	}
 
 	// Execute command with options

@@ -27,7 +27,6 @@ echo -e "\033[0m"
 # rm bin/openUrl
 # rm bin/login
 
-
 #
 # RUN APP
 #
@@ -37,8 +36,6 @@ echo "***************************** RUNNING APP ******************************"
 echo -e "\033[0m"
 
 # cd ./bin
-# ./fforce build /Users/shabazf/go-workspace/fforce/bin /Users/shabazf/go-workspace/fforce/bin/src2/pages/ApplicationShiftSelect.page page
-# ./fforce init
-# ./fforce reset-password
+# ./fforce create
 
 cp ./bin/fforce /usr/local/bin/fforce
