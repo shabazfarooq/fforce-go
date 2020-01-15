@@ -2,13 +2,7 @@ package commands
 
 import (
 	"fmt"
-	"os/exec"
-	// "bytes"
-	"log"
-	"strings"
-	// "io"
-	// "sync"
-	// "../projectio"
+	"../projectio"
 )
 
 type Create struct {
@@ -35,10 +29,7 @@ func (this *Create) New(options Options) {
   this.ComponentName = this.options.Options[1]
 
   // Login
-  loginSucessful := this.login()
-  if !loginSucessful {
-  	log.Fatal("Unable to login with force")
-  }
+  projectio.ExecuteLoginScript(".")
 
   // Create component
   this.createComponent()
@@ -47,20 +38,10 @@ func (this *Create) New(options Options) {
   this.fetchComponent()
 }
 
-// TODO: Dont login unless necessary! save time
-func (this *Create) login() bool {
-	loginCommand := "./login"
-	result := executeShellCommand(loginCommand)
-
-	return strings.Contains(result, "Logged in as")
-}
-
 func (this *Create) createComponent() {
-	cmd := exec.Command("force", "create", "-t", this.ComponentType, "-n", this.ComponentName)
-	executeForceShellCommand(cmd)
+	projectio.ExecuteForceShellCommand("create", "-t", this.ComponentType, "-n", this.ComponentName)
 }
 
 func (this *Create) fetchComponent() {
-	cmd := exec.Command("force", "fetch", "-t", this.ComponentType, "-n", this.ComponentName)
-	executeForceShellCommand(cmd)
+	projectio.ExecuteForceShellCommand("fetch", "-t", this.ComponentType, "-n", this.ComponentName)
 }
