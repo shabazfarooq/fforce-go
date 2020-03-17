@@ -28,7 +28,7 @@ func login(username string,
              password string,
              instanceType string) string {
   return "#!/bin/bash" +
-    "\nforce login -u=" + username + " -p=" + password + " -i=" + instanceType
+    "\nforce login -u=" + username + " -p='" + password + "' -i=" + instanceType
 }
 
 func executeAnon(iStr string) string {
