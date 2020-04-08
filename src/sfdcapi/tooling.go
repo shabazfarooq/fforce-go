@@ -16,12 +16,15 @@ type SfdcConnection struct {
 
 func AuthenticateToSFDC(username string,
                         password string,
+                        securityToken string,
                         serverurl string) SfdcConnection {
 
   // Strip trailing / if any
   serverurl = serverurl + "/services/Soap/u/44.0"
 
-  loginXmlRequest := loginXmlRequest(username, password);
+  passwordWithToken := password + securityToken
+
+  loginXmlRequest := loginXmlRequest(username, passwordWithToken)
 
 
   client := &http.Client{}

@@ -10,6 +10,7 @@ import (
 type ResetPassword struct {
   username string
   password string
+  securityToken string
   instanceUrl string
   instanceType string
   options Options
@@ -27,10 +28,14 @@ func (this *ResetPassword) New(options Options) {
   // Get new password
   this.password = this.askPassword()
 
+  // Get new security token
+  this.securityToken = projectio.AskUser("Enter security token (optional)")
+
   // Authenticate with SFDC
   authenticatedCredentials := sfdcapi.AuthenticateToSFDC(
     this.username,
     this.password,
+    this.securityToken,
     this.instanceUrl,
   )
 
@@ -82,12 +87,14 @@ func (this *ResetPassword) createLocalFilesAndDirectories() {
   projectio.CreateBuildPropertiesFile(
     this.username,
     this.password,
+    this.securityToken,
     this.instanceUrl,
     this.instanceType,
   )
   projectio.CreateLoginFile(
     this.username,
     this.password,
+    this.securityToken,
     this.instanceType,
   )
 }

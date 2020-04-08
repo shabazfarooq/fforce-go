@@ -10,6 +10,7 @@ import (
 type Init struct {
   username string
   password string
+  securityToken string
   instanceUrl string
   instanceType string
   sessionId string
@@ -29,6 +30,7 @@ func (this *Init) New(options Options) {
   authenticatedCredentials := sfdcapi.AuthenticateToSFDC(
     this.username,
     this.password,
+    this.securityToken,
     this.instanceUrl,
   )
 
@@ -50,6 +52,7 @@ func (this *Init) askUserForCredentials() {
   // Capture user credentials
   this.username = projectio.AskUser("Enter username")
   this.password = this.askPassword()
+  this.securityToken = projectio.AskUser("Enter security token (optional)")
   this.instanceType = projectio.AskUser("Enter instance type(test/login/full URL)")
  
   // Finalize instance URL
@@ -87,12 +90,14 @@ func (this *Init) createLocalFilesAndDirectories() {
   projectio.CreateBuildPropertiesFile(
     this.username,
     this.password,
+    this.securityToken,
     this.instanceUrl,
     this.instanceType,
   )
   projectio.CreateLoginFile(
     this.username,
     this.password,
+    this.securityToken,
     this.instanceType,
   )
   projectio.CreateBuildXmlFile()

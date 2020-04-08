@@ -55,6 +55,7 @@ func (this *Build) buildFile() {
 		query := projectio.ExtractFirstQueryFromFile(this.buildFilePath)
 		fmt.Println("Query: " + query + "\n\n")
 
-		projectio.ExecuteForceShellCommand("query", "-f", "console", query)
+		// projectio.ExecuteForceShellCommand("query", "-f", "console", query)
+		projectio.ExecuteForceShellCommand("query", "-f", "csv", query)
 	}
 }

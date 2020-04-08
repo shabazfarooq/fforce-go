@@ -8,6 +8,7 @@ import (
 type BuildPropertiesReadResult struct {
   Username string
   Password string
+  SecurityToken string
   ServerUrl string
   InstanceType string
 }
@@ -43,9 +44,10 @@ func ReadBuildProperties() BuildPropertiesReadResult {
 
   return BuildPropertiesReadResult{
     Username: readFromBuildPropertiesFile(buildProperties, "sf.username = ", 0),
-    Password: readFromBuildPropertiesFile(buildProperties, "sf.password = ", 1),
-    ServerUrl: readFromBuildPropertiesFile(buildProperties, "sf.serverurl = ", 2),
-    InstanceType: readFromBuildPropertiesFile(buildProperties, "sf.instancetype = ", 4),
+    Password: readFromBuildPropertiesFile(buildProperties, "sf.pass = ", 1),
+    SecurityToken: readFromBuildPropertiesFile(buildProperties, "sf.securityToken = ", 2),
+    ServerUrl: readFromBuildPropertiesFile(buildProperties, "sf.serverurl = ", 4),
+    InstanceType: readFromBuildPropertiesFile(buildProperties, "sf.instancetype = ", 6),
   }
 }
 

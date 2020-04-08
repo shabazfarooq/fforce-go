@@ -7,9 +7,10 @@ import (
 
 func CreateBuildPropertiesFile(username string,
                                password string,
+                               securityToken string,
                                serverurl string,
                                instancetype string) {
-  textToWrite := buildProperties(username, password, serverurl, instancetype)
+  textToWrite := buildProperties(username, password, securityToken, serverurl, instancetype)
   writeToFile(BUILDPROPERTIES, textToWrite);
   fmt.Println("... Created build.properties file");
 }
@@ -57,8 +58,8 @@ func CreateOpenUrlFile(username string, password string, instanceUrl string) {
   fmt.Println("... Created openUrl file");
 }
 
-func CreateLoginFile(username string, password string, instanceType string) {
-  textToWrite := login(username, password, instanceType);
+func CreateLoginFile(username string, password string, securityToken string, instanceType string) {
+  textToWrite := login(username, password, securityToken, instanceType);
   filename := "login"
   writeToFile(filename, textToWrite)
   makeFileExecutable(filename)

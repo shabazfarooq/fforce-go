@@ -8,10 +8,13 @@ const BUILDXML = "build.xml"
 
 func buildProperties(username string,
                      password string,
+                     securityToken string,
                      serverurl string,
                      instancetype string) string {
   return "sf.username = " + username +
-    "\nsf.password = " + password +
+    "\nsf.pass = " + password +
+    "\nsf.securityToken = " + securityToken +
+    "\nsf.password = ${sf.pass}${sf.securityToken}" +
     "\nsf.serverurl = " + serverurl +
     "\nsf.maxPoll = 20" +
     "\nsf.instancetype = " + instancetype
@@ -25,10 +28,13 @@ func openUrl(username string,
 }
 
 func login(username string,
-             password string,
-             instanceType string) string {
+           password string,
+           securityToken string,
+           instanceType string) string {
   return "#!/bin/bash" +
-    "\nforce login -u=" + username + " -p='" + password + "' -i=" + instanceType
+    "\npassword='" + password + "'" +
+    "\nsecuritytoken='" + securityToken + "'" +
+    "\nforce login -u=" + username + " -p=$password$securitytoken -i=" + instanceType
 }
 
 func executeAnon(iStr string) string {
@@ -92,7 +98,7 @@ func packageXml() string {
 }
 
 func buildPropertiesReadKeyError(findingKey string) string {
-  exampleBuildProperties := buildProperties("username", "password", "serverurl", "instancetype")
+  exampleBuildProperties := buildProperties("username", "password", "securityToken", "serverurl", "instancetype")
 
   return `Unable to locate "` + findingKey + `" within the build properties file.
 
