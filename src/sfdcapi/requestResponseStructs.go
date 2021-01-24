@@ -94,3 +94,4 @@ type SoapLoginResponse struct {
     } `xml:"loginResponse"`
   } `xml:"Body"`
 }
+

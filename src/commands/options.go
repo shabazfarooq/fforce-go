@@ -16,4 +16,3 @@ func (o Options) hasOption(shortName string, longName string) bool {
 
   return false
 }
-
