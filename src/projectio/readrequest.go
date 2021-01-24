@@ -31,7 +31,7 @@ func ExtractFirstQueryFromFile(queryFilePath string) string {
 
   // Determine query to execute
   queryToExecute := fileContents[firstOccurenceOfOpenSquare+1:firstOccurenceOfCloseSquare];
-  queryToExecute = strings.Replace(queryToExecute, "\n","",-1)
+  queryToExecute = strings.Replace(queryToExecute, "\n"," ",-1)
 
 
   return queryToExecute
