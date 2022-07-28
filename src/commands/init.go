@@ -3,8 +3,8 @@ package commands
 import (
   "fmt"
   "log"
-  "../projectio"
-  "../sfdcapi"
+  "fforce-go/src/projectio"
+  "fforce-go/src/sfdcapi"
 )
 
 type Init struct {

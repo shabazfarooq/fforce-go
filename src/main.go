@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 	"log"
-	"../src/commands"
+	"fforce-go/src/commands"
 )
 
 type BeginProperties struct {

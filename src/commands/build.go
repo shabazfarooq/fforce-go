@@ -3,7 +3,7 @@ package commands
 import (
 	"fmt"
 	"log"
-	"../projectio"
+	"fforce-go/src/projectio"
 )
 
 type Build struct {
