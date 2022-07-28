@@ -104,4 +104,6 @@ func (this *Init) createLocalFilesAndDirectories() {
   projectio.CreatePackageXml();
   projectio.CreateExecuteAnonFile();
   projectio.CreateQueryFile();
+  projectio.CreateGitIgnoreFile();
+  projectio.CreateNotesFolder();
 }

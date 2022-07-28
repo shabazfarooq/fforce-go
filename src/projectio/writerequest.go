@@ -65,3 +65,21 @@ func CreateLoginFile(username string, password string, securityToken string, ins
   makeFileExecutable(filename)
   fmt.Println("... Created login file");
 }
+
+func CreateGitIgnoreFile() {
+  textToWrite := gitIgnore()
+  writeToFile(GITIGNORE, textToWrite)
+  fmt.Println("... Created .gitignore file");
+}
+
+func CreateNotesFolder() {
+  makeDirectory(NOTESFOLDER)
+  fmt.Println("... Created " + NOTESFOLDER + " folder")
+
+  for i := 0; i < 3; i++ {
+    iStr := strconv.Itoa((i+1))
+    fileName := NOTESFOLDER + "/note" + iStr + ".md"
+    writeToFile(fileName, "")
+    fmt.Println("... Created " + fileName + " file");
+  }
+}

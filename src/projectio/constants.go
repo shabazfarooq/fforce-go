@@ -5,6 +5,8 @@ const EXECUTEANONFOLDER = "executeAnonymous"
 const QUERYFOLDER = "query"
 const BUILDPROPERTIES = "build.properties"
 const BUILDXML = "build.xml"
+const GITIGNORE = ".gitignore"
+const NOTESFOLDER = "notes"
 
 func buildProperties(username string,
                      password string,
@@ -95,6 +97,16 @@ func packageXml() string {
     </types>
     <version>40.0</version>
 </Package>`
+}
+
+func gitIgnore() string {
+  return `build.properties
+build.xml
+executeAnonymous
+login
+openUrl
+query
+notes`
 }
 
 func buildPropertiesReadKeyError(findingKey string) string {
