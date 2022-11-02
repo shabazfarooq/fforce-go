@@ -31,6 +31,12 @@ func ExecuteForceShellCommand(commandArgs ...string) {
 	executeShellCommand2(cmd)
 }
 
+func ExecuteShellCommand(command string, commandArgs ...string) {
+	cmd := exec.Command(command, commandArgs...)
+	executeShellCommand2(cmd)
+}
+
+
 /**
  * Private shell commands
  */

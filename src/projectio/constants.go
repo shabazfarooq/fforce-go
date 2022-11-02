@@ -95,7 +95,11 @@ func packageXml() string {
         <members>*</members>
         <name>StaticResource</name>
     </types>
-    <version>40.0</version>
+    <types>
+        <members>*</members>
+        <name>LightningComponentBundle</name>
+    </types>
+    <version>52.0</version>
 </Package>`
 }
 
