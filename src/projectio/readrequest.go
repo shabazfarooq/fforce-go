@@ -33,6 +33,23 @@ func ExtractFirstQueryFromFile(queryFilePath string) string {
   queryToExecute := fileContents[firstOccurenceOfOpenSquare+1:firstOccurenceOfCloseSquare];
   queryToExecute = strings.Replace(queryToExecute, "\n"," ",-1)
 
+  // // Determine if any parameters are set
+  // fmt.Println("fileContentsLength:")
+  // fmt.Println(len(fileContents))
+  // fmt.Println("\n")
+
+  // fileContentsAfterCloseSquare := fileContents[firstOccurenceOfCloseSquare+1:]
+  // firstOccurenceOfNewLineAfterCloseSquare := strings.Index(fileContentsAfterCloseSquare, "\n")
+
+
+  // fmt.Println("fileContentsAtCloseSquare:")
+  // fmt.Println(len(fileContentsAtCloseSquare))
+  // fmt.Println("\n")
+
+  // if len(fileContentsAtCloseSquare) >= 2 {
+
+  // }
+
 
   return queryToExecute
 }

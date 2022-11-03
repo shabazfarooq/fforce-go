@@ -36,7 +36,7 @@ func login(username string,
   return "#!/bin/bash" +
     "\npassword='" + password + "'" +
     "\nsecuritytoken='" + securityToken + "'" +
-    "\nforce login -u=" + username + " -p=$password$securitytoken -i=" + instanceType
+    "\nforce login -u " + username + " -p $password$securitytoken -i " + instanceType
 }
 
 func executeAnon(iStr string) string {
@@ -98,6 +98,10 @@ func packageXml() string {
     <types>
         <members>*</members>
         <name>LightningComponentBundle</name>
+    </types>
+    <types>
+        <members>*</members>
+        <name>AuraDefinitionBundle</name>
     </types>
     <version>52.0</version>
 </Package>`

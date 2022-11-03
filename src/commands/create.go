@@ -3,6 +3,7 @@ package commands
 import (
 	"fmt"
 	"log"
+	"strings"
 	"fforce-go/src/projectio"
 )
 
@@ -44,7 +45,7 @@ func (this *Create) validateAndSetParams(options Options) {
 }
 
 func (this *Create) createComponent() {
-	projectio.ExecuteForceShellCommand("create", "-t", this.ComponentType, "-n", this.ComponentName)
+	projectio.ExecuteForceShellCommand("create", strings.ToLower(this.ComponentType), "-n", this.ComponentName)
 }
 
 func (this *Create) fetchComponent() {
